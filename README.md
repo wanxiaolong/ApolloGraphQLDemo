@@ -9,6 +9,11 @@ npx knex seed:run
 ```
 
 ## 测试
+启动Postgres
+```
+docker compose up -d
+```
+
 启动app
 ```
 node src/index.js
