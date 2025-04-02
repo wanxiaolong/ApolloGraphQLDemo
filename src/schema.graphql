@@ -1,0 +1,32 @@
+# GraphQL Schema 中的 Query 是顶级类型，所有客户端发起的查询都从这里开始。
+# 它定义了客户端如何查询数据，也就是暴露给外界的“入口点”。
+type Query {
+    findBookById(id: ID): Book
+    findBooksByName(name: String): [Book]
+    findBooksByAuthorName(name: String): [Book]
+    findAllBooks: [Book]
+}
+
+# 数据的 增/删/改 操作
+type Mutation {
+    # 创建一个Book对象，返回创建好的Book
+    createBook(id: ID, name: String, pageCount: Int, authorId: ID): Book
+    # 更新一个Book对象，返回更新后的Book
+    updateBook(id: ID, name: String, pageCount: Int, authorId: ID): Book
+    # 删除一个Book对象，true=删除成功，false=删除失败
+    deleteBook(id: ID): Boolean
+}
+
+# 其他的type用来定义数据类型，和java的class定义一个类一样
+type Book {
+    id: ID
+    name: String
+    pageCount: Int
+    author: Author
+}
+
+type Author {
+    id: ID
+    firstName: String
+    lastName: String
+}
