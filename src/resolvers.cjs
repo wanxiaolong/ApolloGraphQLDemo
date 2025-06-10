@@ -4,6 +4,13 @@ const bookTable = 'book';
 const authorTable = "author";
 const resolvers = {
   Query: {
+    // 为什么这些方法的第一个参数是下划线（"_"）？
+    // 在apollo的resolver中，参数是按照固定顺序传递的，这些参数不能交换顺序：
+    // resolver(parent, args, context, info)
+    // parent: 表示父级返回的数据。这里用"_"代替，表示知道有该参数，但是该参数不会被用到
+    // args: 包含客户端传递给该字段的参数。这里是id
+    // context: 包含与请求上下文相关信息
+    // info: 包含GraphQL查询的相关信息
     findBookById: async (_, { id }) => {
       return db(bookTable).where({ id }).first();
     },
